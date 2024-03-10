@@ -1,6 +1,8 @@
+import java.util.Scanner;
+
 public class Game {
     public static void start() {
-
+        Scanner scanner = new Scanner(System.in);
         String start = """
                 __________
                 |/       |
