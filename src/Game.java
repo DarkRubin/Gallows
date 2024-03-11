@@ -18,48 +18,78 @@ public class Game {
     private static int errors = 0;
     private static boolean[] found = new boolean[letters];
     private static int count = 0;
+    private static char[] inputSave = new char[15];
+    private static int inputCount = 0;
 
     public static void start() {
 
         Picture.printPicture(errors);
         while (errors != 6) {
-            errors = test(scanInput());
+            test(scanInput());
             Picture.printPicture(errors);
             printLetters();
             if (count == letters) {
                 System.out.println("Ви виграли!");
+                restart();
                 return;
             }
         }
         System.out.println("Ви програли");
         System.out.println("Слово було: " + word);
+        restart();
     }
     private static char scanInput() {
-        char input = 0;
+        char input;
         System.out.println("\nВведіть символ");
         String s =  scanner.nextLine();
-        return input = s.charAt(0);
+        input = s.charAt(0);
+        for (int i = 0; i < inputCount; i++) {
+            if (input == inputSave[i]) {
+                System.out.println("Буква уже використана!");
+                input = scanInput();
+                break;
+            }
+        }
+        inputSave[inputCount] = input;
+        inputCount++;
+        return input;
     }
 
     private static void printLetters() {
         for (int i = 0; i < letters; i++) {
             if (found[i]){
                 System.out.print(" " + answers[i] + " " );
+            } else {
+                System.out.print(" _ ");
             }
-            System.out.print(" _ ");
         }
     }
 
-    private static int test(char input) {
-        for (int c : answers) {
-            if (answers[c] == input) {
-                found[c] = true;
+    private static void test(char input) {
+        int local = 0;
+        for (int i = 0; i < answers.length; i++) {
+            if (answers[i] == input) {
+                found[i] = true;
                 count++;
-                if (c + 1 >= answers.length) {
-                    return errors;
-                }
+                local++;
             }
+            if (i + 1 >= answers.length && local > 0) return;
         }
-        return errors++;
+        errors++;
+    }
+
+    private static void restart() {
+        errors = 0;
+        count = 0;
+        try {
+            word = Word.newWord();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        answers = word.toCharArray();
+        letters = word.length();
+        found = new boolean[letters];
+        inputSave = new char[15];
+        inputCount = 0;
     }
 }
