@@ -1,5 +1,5 @@
 public record Picture() {
-    static final String start = """
+    private static final String start = """
                 __________
                 |/       |
                 |
@@ -7,10 +7,9 @@ public record Picture() {
                 |
                 |
                 |
-                |
                 ----------
                 """;
-    static final String error1 = """
+    private static final String error1 = """
                 __________
                 |/       |
                 |       (_)
@@ -18,10 +17,9 @@ public record Picture() {
                 |
                 |
                 |
-                |
                 ----------
                 """;
-    static final String error2 = """
+    private static final String error2 = """
                 __________
                 |/       |
                 |       (_)
@@ -29,7 +27,51 @@ public record Picture() {
                 |        |
                 |
                 |
+                ----------
+                """;
+    private static final String error3 = """
+                __________
+                |/       |
+                |       (_)
+                |      / |
+                |        |
+                |
                 |
                 ----------
                 """;
+    private static final String error4 = """
+                __________
+                |/       |
+                |       (_)
+                |      / | \\
+                |        |
+                |
+                |
+                ----------
+                """;
+    private static final String error5 = """
+                __________
+                |/       |
+                |       (_)
+                |      / | \\
+                |        |
+                |       /
+                |
+                ----------
+                """;
+    private static final String error6 = """
+                __________
+                |/       |
+                |       (_)
+                |      / | \\
+                |        |
+                |       / \\
+                |
+                ----------
+                """;
+    private static String[] pictures = {start, error1, error2, error3, error4, error5, error6};
+
+    public static void printPicture(int errors) {
+        System.out.println(pictures[errors]);
+    }
 }
