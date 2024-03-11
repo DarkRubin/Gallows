@@ -5,6 +5,9 @@ public class Game {
 
     private static String word;
 
+    private static final char[] alphabet = {'й','ц','у','к','е','н','г','ш','щ','з','х','ъ','ф','ы',
+            'в','а','п','р','о','л','д','ж','э','я','ч','с','м','и','т','ь','б','ю','ё'};
+
     static {
         try {
             word = Word.newWord();
@@ -12,7 +15,7 @@ public class Game {
             throw new RuntimeException(e);
         }
     }
-    private static char[] answers = word.toCharArray();
+    private static char[] trueAnswers = word.toCharArray();
     private static int letters = word.length();
     private static Scanner scanner = new Scanner(System.in);
     private static int errors = 0;
@@ -41,7 +44,8 @@ public class Game {
     private static char scanInput() {
         char input;
         System.out.println("\nВведіть символ");
-        String s =  scanner.nextLine();
+        String s = scanner.nextLine();
+        s = s.toLowerCase();
         input = s.charAt(0);
         for (int i = 0; i < inputCount; i++) {
             if (input == inputSave[i]) {
@@ -50,15 +54,22 @@ public class Game {
                 break;
             }
         }
-        inputSave[inputCount] = input;
-        inputCount++;
+        for (int j = 0; j < 33; j++) {
+            if (input == alphabet[j]) {
+                inputSave[inputCount] = input;
+                inputCount++;
+                return input;
+            }
+        }
+        System.out.println("Невірний ввід!");
+        input = scanInput();
         return input;
     }
 
     private static void printLetters() {
         for (int i = 0; i < letters; i++) {
             if (found[i]){
-                System.out.print(" " + answers[i] + " " );
+                System.out.print(" " + trueAnswers[i] + " " );
             } else {
                 System.out.print(" _ ");
             }
@@ -67,13 +78,13 @@ public class Game {
 
     private static void test(char input) {
         int local = 0;
-        for (int i = 0; i < answers.length; i++) {
-            if (answers[i] == input) {
+        for (int i = 0; i < trueAnswers.length; i++) {
+            if (trueAnswers[i] == input) {
                 found[i] = true;
                 count++;
                 local++;
             }
-            if (i + 1 >= answers.length && local > 0) return;
+            if (i + 1 >= trueAnswers.length && local > 0) return;
         }
         errors++;
     }
@@ -86,7 +97,7 @@ public class Game {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        answers = word.toCharArray();
+        trueAnswers = word.toCharArray();
         letters = word.length();
         found = new boolean[letters];
         inputSave = new char[15];
