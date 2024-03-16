@@ -17,7 +17,7 @@ public class Game {
     }
     private static char[] trueAnswers = word.toCharArray();
     private static int letters = word.length();
-    private static Scanner scanner = new Scanner(System.in);
+
     private static int errors = 0;
     private static boolean[] found = new boolean[letters];
     private static int count = 0;
@@ -43,6 +43,7 @@ public class Game {
     }
     private static char scanInput() {
         char input;
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\nВведите букву");
         String s = scanner.nextLine();
         s = s.toLowerCase();
