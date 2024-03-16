@@ -32,24 +32,24 @@ public class Game {
             Picture.printPicture(errors);
             printLetters();
             if (count == letters) {
-                System.out.println("Ви виграли!");
+                System.out.println("Вы выиграли!");
                 restart();
                 return;
             }
         }
-        System.out.println("Ви програли");
-        System.out.println("Слово було: " + word);
+        System.out.println("Вы проиграли");
+        System.out.println("Слово было: " + word);
         restart();
     }
     private static char scanInput() {
         char input;
-        System.out.println("\nВведіть символ");
+        System.out.println("\nВведите букву");
         String s = scanner.nextLine();
         s = s.toLowerCase();
         input = s.charAt(0);
         for (int i = 0; i < inputCount; i++) {
             if (input == inputSave[i]) {
-                System.out.println("Буква уже використана!");
+                System.out.println("Буква уже использована!");
                 input = scanInput();
                 break;
             }
@@ -61,7 +61,7 @@ public class Game {
                 return input;
             }
         }
-        System.out.println("Невірний ввід!");
+        System.out.println("Неверный ввод!");
         input = scanInput();
         return input;
     }

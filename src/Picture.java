@@ -69,7 +69,7 @@ public record Picture() {
                 |
                 ----------
                 """;
-    private static String[] pictures = {start, error1, error2, error3, error4, error5, error6};
+    private static final String[] pictures = {start, error1, error2, error3, error4, error5, error6};
 
     public static void printPicture(int errors) {
         System.out.println(pictures[errors]);

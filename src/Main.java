@@ -6,7 +6,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Почати гру - \"y\", Вийти - \"q\" ");
+            System.out.println("Начать игру - \"y\", Выйти - \"q\" ");
             String s = scanner.nextLine();
             if (s.equals("q")) { break; }
             if (s.equals("y")) {
